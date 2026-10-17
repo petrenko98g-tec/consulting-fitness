@@ -899,6 +899,25 @@ h1 b,h2 b,h3 b{font-weight:800!important}
 @keyframes a2bc{0%,38%{opacity:0}44%,92%{opacity:1}97%,100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.a2b .r,.a2b .nf,.a2b .one,.a2b .cap{animation:none;opacity:1}}
 @media(max-width:520px){.a2b .r{padding:8px 12px;font-size:12.5px}.a2b .one{font-size:15px;padding:12px}}
+/* форма, що виїжджає справа (як у клоні Gold's Gym) */
+.drw-ov{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);opacity:0;transition:opacity .3s ease}
+.drw-ov.on{opacity:1}
+.drw{position:fixed;top:0;right:0;bottom:0;z-index:91;width:min(560px,100vw);background:#fff;color:#000;box-shadow:0 0 40px rgba(0,0,0,.18);padding:56px 48px 40px;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease-in-out;visibility:hidden}
+.drw.on{transform:none;visibility:visible}
+.drw:not(.on){transition:transform .3s ease-in-out,visibility 0s .3s}
+.drw-x{position:absolute;top:18px;right:20px;width:40px;height:40px;border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer;color:#000}
+.drw h2{font-weight:300;font-size:clamp(28px,3vw,38px);letter-spacing:-.8px;line-height:1.08;padding-right:30px}
+.drw-sub{font-size:15px;color:#555;margin:12px 0 24px}
+.drw .dfl{display:block;border:1.5px solid #000;border-radius:4px;padding:8px 12px 6px;margin-bottom:12px}
+.drw .dfl span{display:block;font-size:11px;color:#555}
+.drw .dfl input,.drw .dfl select{display:block;width:100%;border:0;outline:0;background:transparent;font:400 16px 'Inter Tight',Arial;color:#000;padding:4px 0 2px;-webkit-appearance:none;appearance:none}
+.drw .dfl:focus-within{border-color:#1a4dff}
+.drw .btn{width:100%;margin-top:8px;padding:16px}
+.drw-note{font-size:12px;color:#555;margin-top:12px}
+.drw .ok{color:#000;text-align:left;width:auto;margin:0;padding:20px 0}
+html.drw-lock{overflow:hidden}
+@media(max-width:600px){.drw{top:auto;left:0;width:100vw;max-height:92vh;border-radius:12px 12px 0 0;padding:44px 18px 28px;transform:translateY(100%)}.drw.on{transform:none}}
+@media(prefers-reduced-motion:reduce){.drw,.drw-ov{transition:none}}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
@@ -1305,6 +1324,31 @@ if(matchMedia('(prefers-reduced-motion:reduce)').matches){hv.removeAttribute('au
 else new IntersectionObserver(es=>{es[0].isIntersecting?hv.play().catch(()=>{}):hv.pause();},{threshold:.05}).observe(hv);
 // мобільне меню закривається, коли шапка ховається при скролі
 addEventListener('scroll',()=>{if(nav.classList.contains('hide'))nav.classList.remove('open');},{passive:true});
+})();
+</script>
+<div class="drw-ov" id="drwOv" hidden></div>
+<aside class="drw" id="drw" role="dialog" aria-modal="true" aria-labelledby="drwT" aria-hidden="true">
+  <button class="drw-x" type="button" aria-label="Закрити">×</button>
+  <h2 id="drwT">Розбір сайту клубу <b>очима споживача</b></h2>
+  <p class="drw-sub">Покажіть сайт або Instagram. Розповімо, що бачить людина, яка чує про вас уперше.</p>
+  <form onsubmit="return sent(this)">
+    <label class="dfl"><span>Ім'я</span><input required autocomplete="name"></label>
+    <label class="dfl"><span>Телефон або Telegram</span><input required type="tel" autocomplete="tel"></label>
+    <label class="dfl"><span>Сайт або Instagram клубу</span><input></label>
+    <label class="dfl"><span>Стан клубу</span><select><option>Клуб працює</option><option>Клуб відкривається</option><option>Кілька клубів</option></select></label>
+    <button class="btn" type="submit">Отримати розбір →</button>
+    <p class="drw-note">Безкоштовно і ні до чого не зобов'язує.</p>
+  </form>
+  <div class="ok"><b>Дякуємо!</b>Напишемо протягом робочого дня.</div>
+</aside>
+<script>
+(function(){
+  var d=document.getElementById('drw'),ov=document.getElementById('drwOv'),last=null,t=0;
+  function open(e){if(e)e.preventDefault();clearTimeout(t);last=document.activeElement;ov.hidden=false;d.setAttribute('aria-hidden','false');requestAnimationFrame(function(){ov.classList.add('on');d.classList.add('on');});document.documentElement.classList.add('drw-lock');setTimeout(function(){var i=d.querySelector('input');if(i)i.focus({preventScroll:true});},320);}
+  function close(){ov.classList.remove('on');d.classList.remove('on');d.setAttribute('aria-hidden','true');document.documentElement.classList.remove('drw-lock');t=setTimeout(function(){ov.hidden=true;},300);if(last&&last.focus)last.focus({preventScroll:true});}
+  document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',open);});
+  d.querySelector('.drw-x').addEventListener('click',close);ov.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('on'))close();});
 })();
 </script>
 </body>
