@@ -1,0 +1,37 @@
+# Consulting Fitness — налаштування для хостингу на Apache / LiteSpeed (cPanel, більшість українських хостингів)
+
+# Тільки HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Не показувати вміст папок і службові файли
+Options -Indexes
+<FilesMatch "^\.|\.(md|cjs|json|bak|log)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  # Браузер пам'ятає, що сайт лише HTTPS (рік)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Сайт не можна вбудувати в чужу сторінку (захист від клікджекінгу)
+  Header always set X-Frame-Options "DENY"
+  Header always set Content-Security-Policy "frame-ancestors 'none'"
+  # Браузер не вгадує тип файлів
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always unset X-Powered-By
+</IfModule>
+
+# Кеш: картинки й відео надовго, сторінку — щоразу перевіряти
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType video/mp4 "access plus 30 days"
+  ExpiresByType video/webm "access plus 30 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+AddType video/webm .webm
+AddType video/mp4 .mp4
