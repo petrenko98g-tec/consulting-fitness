@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; media-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; media-src 'self'; connect-src 'self' https://formsubmit.co; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
@@ -920,6 +920,11 @@ h1 b,h2 b,h3 b{font-weight:800!important}
 html.drw-lock{overflow:hidden}
 @media(max-width:600px){.drw{top:auto;left:0;width:100vw;max-height:92vh;border-radius:12px 12px 0 0;padding:44px 18px 28px;transform:translateY(100%)}.drw.on{transform:none}}
 @media(prefers-reduced-motion:reduce){.drw,.drw-ov{transition:none}}
+/* форми: пастка для ботів і повідомлення про помилку */
+.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.ferr{font-size:13px;color:#c00;margin-top:10px}.ferr a{color:inherit;text-decoration:underline}
+.foot .ferr{color:#ff8a8a}
+button[disabled]{opacity:.6;cursor:wait}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
@@ -954,7 +959,7 @@ html.drw-lock{overflow:hidden}
       <div class="top"><span class="tag">Безкоштовно</span><span style="font-size:13px;color:#555555">для власників клубів</span></div>
       <h3>Розбір сайту клубу <b>очима споживача</b></h3>
       <p>Покажіть сайт або Instagram. Розповімо, що бачить людина, яка чує про вас уперше.</p>
-      <form onsubmit="return sent(this)">
+      <form onsubmit="return sent(this)"><input class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input class="field" required placeholder="Ім'я" autocomplete="name" maxlength="120">
         <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
         <input class="field" placeholder="Сайт або Instagram клубу" maxlength="120">
@@ -1132,7 +1137,7 @@ html.drw-lock{overflow:hidden}
       <div class="fcard">
         <h3>Отримати <b>безкоштовно</b></h3>
         <p>Без зобов'язань. Розбір залишається у вас.</p>
-        <form onsubmit="return sent(this)">
+        <form onsubmit="return sent(this)"><input class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input class="field" required placeholder="Ім'я" maxlength="120">
           <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
           <select class="field" aria-label="Стан клубу"><option>Клуб працює</option><option>Клуб відкривається</option><option>Кілька клубів</option></select>
@@ -1164,14 +1169,14 @@ html.drw-lock{overflow:hidden}
     <div>
       <h5>Сильний клуб. Сильний сайт.</h5>
       <p>Безкоштовний розбір сайту клубу очима споживача.</p>
-      <form onsubmit="return sent(this)">
+      <form onsubmit="return sent(this)"><input class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="in"><input required placeholder="Ім'я" maxlength="120"><input required type="tel" placeholder="Телефон" maxlength="40"><button type="submit">Отримати розбір →</button></div>
       </form>
       <div class="ok"><b>Дякуємо!</b>Напишемо протягом робочого дня.</div>
     </div>
     <div><h5>Формати</h5><ul><li>Лендинг на пробне</li><li>Сайт клубу</li><li>Предпродаж</li></ul></div>
     <div><h5>Ми також</h5><ul><li>Обладнання</li><li>Світло і звук</li><li>Концепція клубу</li><li>CRM і застосунок</li></ul></div>
-    <div><h5>Ми в мережі</h5><ul><li><a href="https://www.instagram.com/fitness_consulting_ua" target="_blank" rel="noopener">Instagram</a></li><li>Telegram</li></ul></div>
+    <div><h5>Контакти</h5><ul><li><a href="tel:+380664660726">+380 66 466 07 26</a></li><li><a href="mailto:petrenko9.8g@gmail.com">petrenko9.8g@gmail.com</a></li><li><a href="https://www.instagram.com/fitness_consulting_ua" target="_blank" rel="noopener">Instagram · @fitness_consulting_ua</a></li></ul></div>
   </div>
   <div class="word">Consulting<br>Fitness</div>
   <div class="copy"><span>Сайти для фітнес-клубів · Україна</span><span><a href="#" onclick="ckOpen();return false" style="text-decoration:underline">Налаштування cookies</a> · © 2026</span></div>
@@ -1201,7 +1206,7 @@ html.drw-lock{overflow:hidden}
       </div>
       <div id="promo2" hidden>
         <p class="ask">Куди надіслати знижку?</p>
-        <form onsubmit="return sent(this)">
+        <form onsubmit="return sent(this)"><input class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" id="promoGoal">
           <input class="field" required placeholder="Ім'я" autocomplete="name" maxlength="120">
           <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
@@ -1251,7 +1256,20 @@ function show(i){const s=S[i];
  sList.innerHTML=s.li.map(x=>'<li>'+x+'</li>').join('');sRes.innerHTML='<span class="res">'+s.res+'</span>';sViz.innerHTML=V[i];}
 S.forEach((s,i)=>{const b=document.createElement('button');b.className='tab';b.textContent='0'+(i+1)+' '+s.k;b.onclick=()=>show(i);tabs.appendChild(b);});
 show(0);
-function sent(f){f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';return false;}
+const FORM_TO='https://formsubmit.co/ajax/petrenko9.8g@gmail.com';
+function formSource(f){if(f.closest('#drw'))return'Бічна форма';if(f.closest('#promo'))return'Знижка −15%';if(f.closest('.foot'))return'Футер';if(f.closest('.offer-strip'))return'Блок «Розбір сайту»';if(f.closest('#form'))return'Перший екран';return'Сайт';}
+function sent(f){
+  const hp=f.querySelector('.hp');if(hp&&hp.value){f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';return false;}
+  const d={_subject:'Нова заявка з сайту Consulting Fitness',_template:'table','Форма':formSource(f),'Сторінка':location.href.split('#')[0]};
+  f.querySelectorAll('input:not([type=hidden]):not(.hp),select').forEach(el=>{const lab=el.closest('label');const k=(lab&&lab.querySelector('span')?lab.querySelector('span').textContent:el.getAttribute('aria-label')||el.placeholder||el.name||'Поле').trim();if(el.value.trim())d[k]=el.value.trim().slice(0,200);});
+  const g=f.querySelector('#promoGoal');if(g&&g.value)d['Задача']=g.value;
+  const btn=f.querySelector('[type=submit]'),txt=btn.textContent;btn.disabled=true;btn.textContent='Надсилаємо…';
+  let err=f.querySelector('.ferr');if(err)err.remove();
+  fetch(FORM_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
+   .then(r=>r.ok?r.json():Promise.reject(r.status))
+   .then(j=>{if(j&&String(j.success)==='false')throw 0;f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';})
+   .catch(()=>{btn.disabled=false;btn.textContent=txt;const e=document.createElement('p');e.className='ferr';e.innerHTML='Не вдалося надіслати. Напишіть нам або зателефонуйте: <a href="tel:+380664660726">+380 66 466 07 26</a>';f.appendChild(e);});
+  return false;}
 </script>
 <script>
 (function(){
@@ -1333,7 +1351,7 @@ addEventListener('scroll',()=>{if(nav.classList.contains('hide'))nav.classList.r
   <button class="drw-x" type="button" aria-label="Закрити">×</button>
   <h2 id="drwT">Розбір сайту клубу <b>очима споживача</b></h2>
   <p class="drw-sub">Покажіть сайт або Instagram. Розповімо, що бачить людина, яка чує про вас уперше.</p>
-  <form onsubmit="return sent(this)">
+  <form onsubmit="return sent(this)"><input class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <label class="dfl"><span>Ім'я</span><input required autocomplete="name" maxlength="120"></label>
     <label class="dfl"><span>Телефон або Telegram</span><input required type="tel" autocomplete="tel" maxlength="40"></label>
     <label class="dfl"><span>Сайт або Instagram клубу</span><input maxlength="120"></label>
