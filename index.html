@@ -2,6 +2,8 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; media-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Сайти для фітнес-клубів — Consulting Fitness</title>
@@ -953,9 +955,9 @@ html.drw-lock{overflow:hidden}
       <h3>Розбір сайту клубу <b>очима споживача</b></h3>
       <p>Покажіть сайт або Instagram. Розповімо, що бачить людина, яка чує про вас уперше.</p>
       <form onsubmit="return sent(this)">
-        <input class="field" required placeholder="Ім'я" autocomplete="name">
-        <input class="field" required type="tel" placeholder="Телефон або Telegram">
-        <input class="field" placeholder="Сайт або Instagram клубу">
+        <input class="field" required placeholder="Ім'я" autocomplete="name" maxlength="120">
+        <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
+        <input class="field" placeholder="Сайт або Instagram клубу" maxlength="120">
         <button class="btn" type="submit">Отримати розбір →</button>
       </form>
       <div class="ok"><b>Дякуємо!</b>Напишемо протягом робочого дня.</div>
@@ -1131,8 +1133,8 @@ html.drw-lock{overflow:hidden}
         <h3>Отримати <b>безкоштовно</b></h3>
         <p>Без зобов'язань. Розбір залишається у вас.</p>
         <form onsubmit="return sent(this)">
-          <input class="field" required placeholder="Ім'я">
-          <input class="field" required type="tel" placeholder="Телефон або Telegram">
+          <input class="field" required placeholder="Ім'я" maxlength="120">
+          <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
           <select class="field" aria-label="Стан клубу"><option>Клуб працює</option><option>Клуб відкривається</option><option>Кілька клубів</option></select>
           <button class="btn" type="submit">Отримати розбір →</button>
         </form>
@@ -1163,7 +1165,7 @@ html.drw-lock{overflow:hidden}
       <h5>Сильний клуб. Сильний сайт.</h5>
       <p>Безкоштовний розбір сайту клубу очима споживача.</p>
       <form onsubmit="return sent(this)">
-        <div class="in"><input required placeholder="Ім'я"><input required type="tel" placeholder="Телефон"><button type="submit">Отримати розбір →</button></div>
+        <div class="in"><input required placeholder="Ім'я" maxlength="120"><input required type="tel" placeholder="Телефон" maxlength="40"><button type="submit">Отримати розбір →</button></div>
       </form>
       <div class="ok"><b>Дякуємо!</b>Напишемо протягом робочого дня.</div>
     </div>
@@ -1201,8 +1203,8 @@ html.drw-lock{overflow:hidden}
         <p class="ask">Куди надіслати знижку?</p>
         <form onsubmit="return sent(this)">
           <input type="hidden" id="promoGoal">
-          <input class="field" required placeholder="Ім'я" autocomplete="name">
-          <input class="field" required type="tel" placeholder="Телефон або Telegram">
+          <input class="field" required placeholder="Ім'я" autocomplete="name" maxlength="120">
+          <input class="field" required type="tel" placeholder="Телефон або Telegram" maxlength="40">
           <button class="btn" type="submit">Закріпити −15% →</button>
         </form>
         <div class="ok"><b>Знижка ваша!</b>Напишемо протягом робочого дня.</div>
@@ -1291,7 +1293,7 @@ sc.addEventListener('mousemove',e=>{if(!dn)return;e.preventDefault();sc.scrollLe
 // cookies + знижка
 const get=(s,k)=>{try{return s.getItem(k)}catch(e){return null}},set=(s,k,v)=>{try{s.setItem(k,v)}catch(e){}};
 const ck=document.getElementById('ck'),promo=document.getElementById('promo'),tab=document.getElementById('promoTab'),nav=document.querySelector('nav');
-function promoOpen(force){if(!force&&get(sessionStorage,'cf_promo'))return;promo.classList.add('on');tab.classList.remove('on');document.documentElement.style.overflow='hidden';}
+function promoOpen(force){if(!force&&get(sessionStorage,'cf_promo'))return;var dw=document.getElementById('drw');if(dw&&dw.classList.contains('on')){setTimeout(function(){promoOpen(force)},4000);return;}promo.classList.add('on');tab.classList.remove('on');document.documentElement.style.overflow='hidden';}
 window.promoClose=()=>{promo.classList.remove('on');document.documentElement.style.overflow='';set(sessionStorage,'cf_promo','1');if(!get(sessionStorage,'cf_promo_off'))tab.classList.add('on');};
 window.promoPick=b=>{promoGoal.value=b.textContent;promo1.hidden=true;promo2.hidden=false;promo2.querySelector('.field').focus();};
 tab.addEventListener('click',e=>{if(e.target.hasAttribute('data-x')){tab.classList.remove('on');set(sessionStorage,'cf_promo_off','1');}else promoOpen(true);});
@@ -1332,9 +1334,9 @@ addEventListener('scroll',()=>{if(nav.classList.contains('hide'))nav.classList.r
   <h2 id="drwT">Розбір сайту клубу <b>очима споживача</b></h2>
   <p class="drw-sub">Покажіть сайт або Instagram. Розповімо, що бачить людина, яка чує про вас уперше.</p>
   <form onsubmit="return sent(this)">
-    <label class="dfl"><span>Ім'я</span><input required autocomplete="name"></label>
-    <label class="dfl"><span>Телефон або Telegram</span><input required type="tel" autocomplete="tel"></label>
-    <label class="dfl"><span>Сайт або Instagram клубу</span><input></label>
+    <label class="dfl"><span>Ім'я</span><input required autocomplete="name" maxlength="120"></label>
+    <label class="dfl"><span>Телефон або Telegram</span><input required type="tel" autocomplete="tel" maxlength="40"></label>
+    <label class="dfl"><span>Сайт або Instagram клубу</span><input maxlength="120"></label>
     <label class="dfl"><span>Стан клубу</span><select><option>Клуб працює</option><option>Клуб відкривається</option><option>Кілька клубів</option></select></label>
     <button class="btn" type="submit">Отримати розбір →</button>
     <p class="drw-note">Безкоштовно і ні до чого не зобов'язує.</p>
