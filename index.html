@@ -992,6 +992,25 @@ nav .bar>.logo{transition:none}
 @media(min-width:901px){.hero .wrap>div:first-child .stars{padding-bottom:52px}.hero .fcard{display:flex;flex-direction:column}.hero .fcard form{margin-top:auto}}
 /* мобільний: заголовок hero більший */
 @media(max-width:600px){.hero h1{font-size:clamp(36px,12.4vw,56px)}}
+/* мобільне меню як у Gold's Gym: чорна панель на весь екран, великі пункти капсом, кнопка внизу */
+@media(max-width:900px){
+  nav .bar{transition:background-color .3s ease,box-shadow .3s ease}
+  nav.open .bar{background:#000;box-shadow:none}
+  nav.open .logo{color:#fff}
+  nav.open .burger span{background:#fff}
+  nav.open .right .btn{opacity:0;pointer-events:none}
+  nav ul{display:flex!important;position:fixed;inset:0;z-index:-1;margin:0;border-radius:0;box-shadow:none;background:#000;flex-direction:column;align-items:stretch;padding:104px 24px calc(28px + env(safe-area-inset-bottom));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .5s cubic-bezier(.4,0,.2,1),visibility 0s linear .5s}
+  nav.open ul{transform:none;visibility:visible;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  nav ul li{opacity:0;transform:translateX(24px);transition:opacity .4s ease,transform .4s ease}
+  nav.open ul li{opacity:1;transform:none}
+  nav.open ul li:nth-child(1){transition-delay:.15s}nav.open ul li:nth-child(2){transition-delay:.2s}nav.open ul li:nth-child(3){transition-delay:.25s}nav.open ul li:nth-child(4){transition-delay:.3s}nav.open ul li:nth-child(5){transition-delay:.35s}nav.open ul li:nth-child(6){transition-delay:.4s}
+  nav ul a{display:block;border:0!important;padding:13px 0!important;color:#fff;font:800 28px/1.05 'Inter Tight',Arial,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+  nav ul li.mcta{margin-top:auto;padding-top:24px}
+  nav ul li.mcta a.btn{display:flex;width:100%;background:#fff;color:#000;font:600 15px 'Inter Tight',Arial;letter-spacing:.3px;padding:18px!important;border-radius:4px}
+  html:has(nav.open){overflow:hidden}
+  html:has(nav.open) .promo-tab,html:has(nav.open) .promo{opacity:0;pointer-events:none}
+  html.pl-on .burger,html.intro-on .burger{pointer-events:none}
+}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
@@ -1011,6 +1030,7 @@ nav .bar>.logo{transition:none}
       <li><a href="#cases">Клуби</a></li>
       <li><a href="#formats">Формати</a></li>
       <li class="m-only"><a href="#faq">FAQ</a></li>
+      <li class="m-only mcta"><a href="#form" class="btn">Безкоштовний розбір →</a></li>
     </ul>
     <a href="#top" class="logo">Consulting Fitness</a>
     <div class="right"><a href="#faq" class="ph-num">FAQ</a><a href="#form" class="btn"><span class="lg">Безкоштовний розбір</span><span class="sm">Розбір</span></a></div>
@@ -1470,7 +1490,7 @@ addEventListener('scroll',()=>{if(nav.classList.contains('hide'))nav.classList.r
 <script>
 (function(){
   var d=document.getElementById('drw'),ov=document.getElementById('drwOv'),last=null,t=0;
-  function open(e){if(e)e.preventDefault();clearTimeout(t);last=document.activeElement;ov.hidden=false;d.setAttribute('aria-hidden','false');requestAnimationFrame(function(){ov.classList.add('on');d.classList.add('on');});document.documentElement.classList.add('drw-lock');setTimeout(function(){var i=d.querySelector('input');if(i)i.focus({preventScroll:true});},320);}
+  function open(e){if(e)e.preventDefault();clearTimeout(t);last=document.activeElement;ov.hidden=false;d.setAttribute('aria-hidden','false');var sh=function(){ov.classList.add('on');d.classList.add('on');};requestAnimationFrame(sh);setTimeout(sh,60);document.documentElement.classList.add('drw-lock');setTimeout(function(){var i=d.querySelector('input');if(i)i.focus({preventScroll:true});},320);}
   function close(){ov.classList.remove('on');d.classList.remove('on');d.setAttribute('aria-hidden','true');document.documentElement.classList.remove('drw-lock');t=setTimeout(function(){ov.hidden=true;},300);if(last&&last.focus)last.focus({preventScroll:true});}
   document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',open);});
   d.querySelector('.drw-x').addEventListener('click',close);ov.addEventListener('click',close);
