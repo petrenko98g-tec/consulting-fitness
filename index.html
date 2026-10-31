@@ -964,35 +964,40 @@ button[disabled]{opacity:.6;cursor:wait}
 .hero .fcard .ok{color:#fff}
 .hero .fcard .ferr{color:#ffb3b3}
 /* прелоадер як у John Reed: шапка видна одразу, під нею білий фон; потім різко з'являється перший екран, а за мить — пункти меню */
-.pl{position:fixed;inset:0;z-index:45;background:#fff;transition:opacity .25s ease}
-.pl.out{opacity:0;pointer-events:none}
+.pl{position:fixed;inset:0;z-index:45;background:#fff;transition:transform .8s cubic-bezier(.76,0,.24,1)}
+.pl.out{transform:translateY(-100%);pointer-events:none}
 html.pl-on nav .bar>*:not(.logo){opacity:0}
 html.pl-on nav .bar{box-shadow:none}
 html.pl-on .promo-tab{opacity:0}
+html.pl-on .hero *,html.pl-on .hero{animation-play-state:paused!important}
 nav .bar>*{transition:opacity .45s ease .2s}
 @media(prefers-reduced-motion:reduce){.pl,nav .bar>*{transition:none}}
 /* перший екран: текст і форма трохи вище від низу */
 @media(min-width:901px){.hero{padding-bottom:max(56px,11vh)}}
 /* біла заставка як у Gold's Gym: логотип перевертається в панель, потім зменшується й стає на місце логотипа в шапці; далі — прелоадер у стилі John Reed */
-.intro{position:fixed;inset:0;z-index:10000;background:#fff;display:grid;place-items:center;transition:background-color .6s ease .3s}
-.intro.fly{background-color:rgba(255,255,255,0)}
+.intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center}
+.intro .ibg{position:absolute;inset:0;background:#fff;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.intro.fly{pointer-events:none}
+.intro.fly .ibg{transform:translateY(-100%)}
 html.intro-on nav .logo{opacity:0}
 nav .bar>.logo{transition:none}
-.intro .in{perspective:800px}
+.intro .in{position:relative;perspective:800px}
 .intro .ilogo{display:block;transform-origin:50% 50%;will-change:transform;font-family:"Dela Gothic One","Inter Tight",sans-serif;text-transform:uppercase;letter-spacing:-.022em;font-size:clamp(24px,4.4vw,56px);color:#000;transform-style:preserve-3d;backface-visibility:hidden;animation:ggPreIn .85s cubic-bezier(.215,.61,.355,1) .1s both}
 @keyframes ggPreIn{from{transform:rotateX(-90deg) translateY(100%)}to{transform:rotateX(0deg) translateY(0)}}
 @media(prefers-reduced-motion:reduce){.intro{display:none}}
 /* футер: великий слоган */
 .foot h5.fslogan{font-size:clamp(30px,3.2vw,46px);font-weight:300;line-height:1.05;letter-spacing:-.025em;margin-bottom:18px}
 .foot h5.fslogan b{display:block;font-weight:900;-webkit-text-stroke:.022em currentColor;letter-spacing:-.01em}
+/* мітка над заголовком hero — з відступом; форма тягнеться на ту ж висоту, поля притиснуті донизу */
+@media(min-width:901px){.hero .wrap>div:first-child .stars{padding-bottom:52px}.hero .fcard{display:flex;flex-direction:column}.hero .fcard form{margin-top:auto}}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
 <body>
-<div class="intro" id="intro" aria-hidden="true"><div class="in"><span class="ilogo">Consulting Fitness</span></div></div>
+<div class="intro" id="intro" aria-hidden="true"><div class="ibg"></div><div class="in"><span class="ilogo">Consulting Fitness</span></div></div>
 <div class="pl" id="pl" aria-hidden="true"></div>
 <noscript><style>.pl,.intro{display:none}</style></noscript>
-<script>document.documentElement.classList.add("pl-on","intro-on");(function(){var p=document.getElementById("pl"),it=document.getElementById("intro"),loaded=false,introGone=!it,done=false,t0=Date.now();var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;function hide(){if(done||!loaded||!introGone)return;done=true;p.classList.add("out");document.documentElement.classList.remove("pl-on");setTimeout(function(){p.remove()},400)}function introOut(){if(introGone||it.__out)return;it.__out=1;var L=it.querySelector(".ilogo"),N=document.querySelector("nav .logo");if(rm||!L||!N){introGone=true;it.remove();document.documentElement.classList.remove("intro-on");hide();return}var a=L.getBoundingClientRect(),n=N.getBoundingClientRect();L.style.animation="none";L.style.transform="none";void L.offsetWidth;var sc=n.width/a.width,dx=(n.left+n.width/2)-(a.left+a.width/2),dy=(n.top+n.height/2)-(a.top+a.height/2);L.style.transition="transform .9s cubic-bezier(.76,0,.24,1)";it.classList.add("fly");L.style.transform="translate("+dx+"px,"+dy+"px) scale("+sc+")";setTimeout(function(){introGone=true;document.documentElement.classList.remove("intro-on");it.remove();hide()},920)}if(it)setTimeout(introOut,rm?0:1500);window.addEventListener("load",function(){loaded=true;hide()});setTimeout(function(){loaded=true;if(it)introOut();hide()},4000);})();</script>
+<script>document.documentElement.classList.add("pl-on","intro-on");(function(){var D=document.documentElement,p=document.getElementById("pl"),it=document.getElementById("intro"),loaded=false,introGone=!it,done=false;var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;function reveal(){D.classList.remove("pl-on");if(p)p.remove()}function hide(){if(done||!loaded||!introGone)return;done=true;  if(!p||p.style.display==="none"||rm){reveal();return}  p.classList.add("out");setTimeout(reveal,800)}function introOut(){if(introGone||it.__out)return;it.__out=1;  var L=it.querySelector(".ilogo"),N=document.querySelector("nav .logo");  if(rm||!L||!N){introGone=true;it.remove();D.classList.remove("intro-on");hide();return}  var a=L.getBoundingClientRect(),n=N.getBoundingClientRect();  L.style.animation="none";L.style.transform="none";void L.offsetWidth;  var sc=n.width/a.width,dx=(n.left+n.width/2)-(a.left+a.width/2),dy=(n.top+n.height/2)-(a.top+a.height/2);  if(loaded&&p)p.style.display="none";  L.style.transition="transform .9s cubic-bezier(.76,0,.24,1)";it.classList.add("fly");  L.style.transform="translate("+dx+"px,"+dy+"px) scale("+sc+")";  setTimeout(function(){D.classList.remove("intro-on");it.remove();introGone=true;hide()},920)}if(it)setTimeout(introOut,rm?0:1500);window.addEventListener("load",function(){loaded=true;hide()});setTimeout(function(){loaded=true;if(it)introOut();hide()},4000);})();</script>
 
 
 <nav>
