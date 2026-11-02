@@ -1018,12 +1018,15 @@ nav .bar>.logo{transition:none}
 .ph>.tag.soon{position:absolute;top:14px;left:14px;z-index:3}
 /* десктоп: більший текст для читання (як на великих фітнес-сайтах — основний текст 18px) */
 @media(min-width:901px){
-  .sh{font-size:clamp(32px,3.3vw,50px)}
+  .sh{font-size:clamp(38px,3.9vw,58px)}
+  .banner h2,.offer-strip h2{font-size:clamp(34px,3.4vw,52px)}
   .lead-c,.hero p.sub{font-size:20px;line-height:1.55}
   .refr,.verdict{font-size:clamp(22px,2.1vw,30px)}
   .paincard q{font-size:24px;line-height:1.25}
   .paincard p,.gcard p,.fcard p,.wcard p,.acc-body p,.mcard details p{font-size:18px;line-height:1.6}
   .hero .fcard p{font-size:16px}
+  .wcard h3{font-size:clamp(30px,2.7vw,40px)}
+  .wcard .ph.viz,.wcard .ph.viz .cap span,.wcard .leg div{font-size:16px}
   .drw-sub{font-size:17px}
   .gcard h4,.fmtcard h4{font-size:24px}
   .fmtcard .pr{font-size:17px}
@@ -1037,6 +1040,31 @@ nav .bar>.logo{transition:none}
   nav .btn{font-size:13px}
   .tab{font-size:15px}
   .pill{font-size:14px}
+}
+/* мобільна: більший текст для читання */
+@media(max-width:900px){
+  .sh{font-size:clamp(34px,10vw,46px)}
+  .banner h2,.offer-strip h2{font-size:clamp(32px,9vw,42px)}
+  .lead-c,.hero p.sub{font-size:17px;line-height:1.5}
+  .paincard q{font-size:20px;line-height:1.25}
+  .paincard p,.gcard p,.fcard p,.wcard p,.acc-body p,.mcard details p,.visual p{font-size:16px;line-height:1.55}
+  .hero .fcard p{font-size:15px}
+  .wcard h3{font-size:30px;line-height:1.15}
+  .wcard p{font-size:17px}
+  .wcard .ph.viz,.wcard .ph.viz .cap span,.wcard .leg div{font-size:15px}
+  .wcard .leg b{font-size:44px}
+  .drw-sub{font-size:16px}
+  .gcard h4,.fmtcard h4{font-size:22px}
+  .fmtcard .pr{font-size:16px}
+  .acc summary,.faq summary{font-size:19px}
+  .ccard .cap b{font-size:20px}
+  .ccard .cap span{font-size:14px}
+  .offer-strip li,.offer-strip ol.tl>li{font-size:17px}
+  .foot p,.foot li{font-size:15px}
+  .tab{font-size:14px}
+  .pill{font-size:13px}
+  .dfl span{font-size:12px}
+  .drw-note{font-size:13px}
 }
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
