@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com https://*.clarity.ms https://c.bing.com; media-src 'self'; connect-src 'self' https://formsubmit.co https://api.telegram.org https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://*.clarity.ms; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com https://*.clarity.ms https://c.bing.com; media-src 'self'; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://*.clarity.ms; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Сайти для фітнес-клубів, які перетворюють незнайомців на клієнтів. Від людей із фітнес-індустрії. Безкоштовний розбір сайту вашого клубу.">
 <meta property="og:type" content="website">
@@ -1388,11 +1388,10 @@ function cfTrackLead(name,id){const src=cfSource();cfEvent('generate_lead',{form
 (function(){try{if(sessionStorage.getItem('cf_src'))return;const q=new URLSearchParams(location.search),o={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(k=>{const v=q.get(k);if(v)o[k]=v.slice(0,120)});const r=document.referrer;if(r&&!r.startsWith(location.origin))o.referrer=r.slice(0,200);sessionStorage.setItem('cf_src',JSON.stringify(o));}catch(e){}})();
 function cfSource(){try{return JSON.parse(sessionStorage.getItem('cf_src')||'{}')}catch(e){return{}}}
 const FORM_TO='https://formsubmit.co/ajax/petrenko9.8g@gmail.com';
-/* копія заявки в Telegram: токен бота від @BotFather і chat_id того, хто натиснув Start у боті. Порожньо — лише пошта */
-const TELEGRAM={bot:'',chat:''};
-function cfTelegram(d){if(!TELEGRAM.bot||!TELEGRAM.chat)return;
-  const lines=['🔥 Нова заявка — Consulting Fitness',''];Object.keys(d).forEach(k=>{if(k[0]!=='_'&&d[k])lines.push(k+': '+d[k]);});
-  try{fetch('https://api.telegram.org/bot'+TELEGRAM.bot+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify({chat_id:TELEGRAM.chat,text:lines.join('\n').slice(0,4000),disable_web_page_preview:true})}).catch(()=>{});}catch(e){}}
+/* копія заявки в Telegram — через серверну функцію /api/lead на Cloudflare (токен бота лежить там у секретах, не в коді сторінки) */
+const LEAD_RELAY=/(^|\.)websites\.fitness$|\.pages\.dev$/.test(location.hostname)?'/api/lead':'';
+function cfTelegram(d){if(!LEAD_RELAY)return;
+  try{fetch(LEAD_RELAY,{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify(d)}).catch(()=>{});}catch(e){}}
 function formSource(f){if(f.closest('#drw'))return'Бічна форма';if(f.closest('#promo'))return'Знижка −15%';if(f.closest('.foot'))return'Футер';if(f.closest('.offer-strip'))return'Блок «Розбір сайту»';if(f.closest('#form'))return'Перший екран';return'Сайт';}
 function sent(f){
   const hp=f.querySelector('.hp');if(hp&&hp.value){f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';return false;}

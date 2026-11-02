@@ -1,1 +1,7 @@
 .DS_Store
+# Cloudflare / локальні секрети — ніколи не комітити
+.dev.vars
+.env
+.env.*
+.wrangler/
+node_modules/
