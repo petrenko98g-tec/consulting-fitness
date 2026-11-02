@@ -11,6 +11,7 @@
   Cache-Control: public, max-age=2592000
 
 /assets/*.woff2
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 # технічні адреси *.pages.dev не індексуються, щоб не дублювати websites.fitness
