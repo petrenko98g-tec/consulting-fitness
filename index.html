@@ -1016,6 +1016,28 @@ nav .bar>.logo{transition:none}
   html.pl-on .burger,html.intro-on .burger{pointer-events:none}
 }
 .ph>.tag.soon{position:absolute;top:14px;left:14px;z-index:3}
+/* десктоп: більший текст для читання (як на великих фітнес-сайтах — основний текст 18px) */
+@media(min-width:901px){
+  .sh{font-size:clamp(32px,3.3vw,50px)}
+  .lead-c,.hero p.sub{font-size:20px;line-height:1.55}
+  .refr,.verdict{font-size:clamp(22px,2.1vw,30px)}
+  .paincard q{font-size:24px;line-height:1.25}
+  .paincard p,.gcard p,.fcard p,.wcard p,.acc-body p,.mcard details p{font-size:18px;line-height:1.6}
+  .hero .fcard p{font-size:16px}
+  .drw-sub{font-size:17px}
+  .gcard h4,.fmtcard h4{font-size:24px}
+  .fmtcard .pr{font-size:17px}
+  .acc summary,.faq summary{font-size:21px}
+  .mcard summary{font-size:26px}
+  .ccard .cap b{font-size:24px}
+  .ccard .cap span{font-size:15px}
+  .offer-strip li,.offer-strip ol.tl>li{font-size:18px}
+  .foot p,.foot li{font-size:16px}
+  .btn{font-size:16px}
+  nav .btn{font-size:13px}
+  .tab{font-size:15px}
+  .pill{font-size:14px}
+}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
