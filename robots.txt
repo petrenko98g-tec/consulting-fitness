@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petrenko98g-tec.github.io/consulting-fitness/sitemap.xml
+Sitemap: https://websites.fitness/sitemap.xml
