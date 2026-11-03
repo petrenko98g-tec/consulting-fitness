@@ -1083,6 +1083,22 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
 .drw-note{font-size:14px}
 @media(min-width:901px){.verdict{font-size:clamp(28px,2.7vw,38px)}}
 @media(max-width:900px){.verdict{font-size:24px}}
+/* картки з цифрами: синій акцент лише на головному (смужка 0,05 с, сім точок і «7», «Сайт відповів») */
+.wcard .ph.viz{--acc:#1a4dff}
+/* «Не лише сайт…»: синій акцент лише на головному (ідея клубу, крапка, що біжить, і «Заявка», смужка «Перші тренування») */
+.gva .gtop{background:#1a4dff;animation-name:g1pb}
+@keyframes g1pb{0%,100%{box-shadow:0 0 0 0 rgba(26,77,255,.35)}45%{box-shadow:0 0 0 12px rgba(26,77,255,0)}}
+.gpath .k>i{animation-name:g2kb}
+@keyframes g2kb{0%,82%{box-shadow:0 0 0 0 rgba(26,77,255,.4)}92%{box-shadow:0 0 0 10px rgba(26,77,255,0)}100%{box-shadow:0 0 0 0 rgba(26,77,255,0)}}
+.gpath .gln i,.gpath .k>i{background:#1a4dff}
+.gpath .k>i{border-color:#1a4dff}
+.grep .k i{background:#1a4dff}
+/* решта анімацій: трохи синього лише на головному елементі кожної */
+.stepvis .ph{--acc:#1a4dff}
+.fmtcard .fv .fbt{background:#1a4dff}
+.sysv .stop{background:#1a4dff}
+/* без стрілок: кнопка по центру */
+#truth .ctrl{justify-content:center}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
@@ -1157,7 +1173,7 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
     <div class="paincard"><div><q>Запис у застосунку є, але ним мало хто користується</q></div><p>Зі сторінки на застосунок немає жодного посилання.</p></div>
     <div class="paincard"><div><q>Сайт робили давно, і з телефона його ніхто не перевіряв</q></div><p>Блоки дублюються, щось з'їхало. А більшість людей бачить саме цю версію.</p></div>
   </div>
-  <div class="ctrl"><button class="arrow" onclick="pcMove(-1)" aria-label="Назад">⟵</button><a href="#form" class="btn">Розібрати мій сайт →</a><button class="arrow" onclick="pcMove(1)" aria-label="Далі">⟶</button></div>
+  <div class="ctrl"><a href="#form" class="btn">Розібрати мій сайт →</a></div>
   <p class="verdict">Жодна з цих проблем <b>не вирішується красивішим дизайном.</b></p>
 </section>
 
@@ -1167,7 +1183,7 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
     <h2 class="sh">Новий клієнт вирішує <b>швидше, ніж читає</b></h2>
     <div class="why">
       <div class="wcard"><div class="t"><h3>0,05 с на перше враження</h3><p>Стільки потрібно людині, щоб скласти перше враження про сайт.</p></div><div class="ph viz v1" role="img" aria-label="0,05 секунди — це двадцята частина однієї секунди"><div class="bar"><i></i></div><div class="cap"><span><b>0,05 с</b> · враження вже є</span><span>1 секунда</span></div></div></div>
-      <div class="wcard"><div class="t"><h3>На поганому сайті заявку лишають 7 зі 100</h3><p>Решта 93 закривають вкладку. А за кожного з них ви вже заплатили рекламою.</p></div><div class="ph viz v2" role="img" aria-label="Зі 100 відвідувачів 7 лишають заявку, 93 йдуть"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="6" fill="#000"/></pattern></defs><rect y="0" width="200" height="20" fill="url(#dots)" style="--i:9"/><rect y="20" width="200" height="20" fill="url(#dots)" style="--i:8"/><rect y="40" width="200" height="20" fill="url(#dots)" style="--i:7"/><rect y="60" width="200" height="20" fill="url(#dots)" style="--i:6"/><rect y="80" width="200" height="20" fill="url(#dots)" style="--i:5"/><rect y="100" width="200" height="20" fill="url(#dots)" style="--i:4"/><rect y="120" width="200" height="20" fill="url(#dots)" style="--i:3"/><rect y="140" width="200" height="20" fill="url(#dots)" style="--i:2"/><rect y="160" width="200" height="20" fill="url(#dots)" style="--i:1"/><rect y="180" width="200" height="20" fill="url(#dots)" style="--i:0"/><g fill="#1a4dff"><circle cx="10" cy="10" r="6"/><circle cx="30" cy="10" r="6"/><circle cx="50" cy="10" r="6"/><circle cx="70" cy="10" r="6"/><circle cx="90" cy="10" r="6"/><circle cx="110" cy="10" r="6"/><circle cx="130" cy="10" r="6"/></g></svg><div class="leg"><div class="a"><b>7</b>лишають заявку</div><div><b>93</b>йдуть</div></div></div></div>
+      <div class="wcard"><div class="t"><h3>На типовому сайті заявку лишають 7 зі 100</h3><p>Решта 93 закривають вкладку. А за кожного з них ви вже заплатили рекламою.</p></div><div class="ph viz v2" role="img" aria-label="Зі 100 відвідувачів 7 лишають заявку, 93 йдуть"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="6" fill="#000"/></pattern></defs><rect y="0" width="200" height="20" fill="url(#dots)" style="--i:9"/><rect y="20" width="200" height="20" fill="url(#dots)" style="--i:8"/><rect y="40" width="200" height="20" fill="url(#dots)" style="--i:7"/><rect y="60" width="200" height="20" fill="url(#dots)" style="--i:6"/><rect y="80" width="200" height="20" fill="url(#dots)" style="--i:5"/><rect y="100" width="200" height="20" fill="url(#dots)" style="--i:4"/><rect y="120" width="200" height="20" fill="url(#dots)" style="--i:3"/><rect y="140" width="200" height="20" fill="url(#dots)" style="--i:2"/><rect y="160" width="200" height="20" fill="url(#dots)" style="--i:1"/><rect y="180" width="200" height="20" fill="url(#dots)" style="--i:0"/><g fill="#1a4dff"><circle cx="10" cy="10" r="6"/><circle cx="30" cy="10" r="6"/><circle cx="50" cy="10" r="6"/><circle cx="70" cy="10" r="6"/><circle cx="90" cy="10" r="6"/><circle cx="110" cy="10" r="6"/><circle cx="130" cy="10" r="6"/></g></svg><div class="leg"><div class="a"><b>7</b>лишають заявку</div><div><b>93</b>йдуть</div></div></div></div>
       <div class="wcard"><div class="t"><h3>1 питання: «Що суто для мене?»</h3><p>Якщо сайт на нього не відповідає, він губить клієнта.</p></div><div class="ph viz v3" role="img" aria-label="Якщо сайт відповідає на питання, людина записується; якщо ні — клієнт втрачений"><div class="q">«Що суто для мене?»</div><i class="stem"></i><i class="fork"></i><div class="ans"><div class="yes"><b>Сайт відповів</b><span>запис на перше тренування</span></div><div class="no"><b>Не відповів</b><span>клієнт пішов</span></div></div></div></div>
     </div>
   </div>
