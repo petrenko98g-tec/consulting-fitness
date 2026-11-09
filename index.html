@@ -1099,6 +1099,10 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
 .sysv .stop{background:#1a4dff}
 /* без стрілок: кнопка по центру */
 #truth .ctrl{justify-content:center}
+/* мобільна: форму в першому екрані ховаємо (кнопки «Розбір» відкривають бічну форму) */
+@media(max-width:900px){.hero .fcard{display:none}}
+/* відео на всю висоту першого екрана, без смуги знизу */
+.hero .bg{bottom:0;height:auto}
 .promo-tab i{font-style:normal;font-weight:300;font-size:17px;line-height:1}
 </style>
 </head>
@@ -1113,9 +1117,9 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   <div class="bar">
     <button class="burger" aria-label="Меню" aria-expanded="false" onclick="this.setAttribute('aria-expanded',this.closest('nav').classList.toggle('open'))"><span></span><span></span><span></span></button>
     <ul onclick="this.closest('nav').classList.remove('open')">
+      <li><a href="#cases">Клуби</a></li>
       <li><a href="#truth">Чому</a></li>
       <li><a href="#method">Як ми працюємо</a></li>
-      <li><a href="#cases">Клуби</a></li>
       <li><a href="#formats">Формати</a></li>
       <li class="m-only"><a href="#faq">FAQ</a></li>
       <li class="m-only mcta"><a href="#form" class="btn">Безкоштовний розбір →</a></li>
@@ -1151,7 +1155,19 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   </div>
 </header>
 
-<!-- 3. БОЛІ -->
+<!-- 2. ПОРТФОЛІО — кейси одразу після першого екрана -->
+<section id="cases">
+  <div class="wrap">
+    <h2 class="sh">Клуби, <b>з якими ми працюємо</b></h2>
+    <div class="g3">
+      <div class="ccard"><div class="ph mock" role="img" aria-label="Сайт клубу Happy Sport Club на екрані монітора"><div class="imac"><div class="scr"><img width="800" height="500" src="assets/hsc-site-desk.jpg" alt="Сайт фітнес-клубу Happy Sport Club, Рівне — головна сторінка" loading="lazy"></div><div class="chin"></div><div class="neck"></div></div><span class="tag soon">В розробці</span><div class="cap"><b>Happy Sport Club</b><span>Рівне · «Зал, який ти шукав, у середині твого кварталу»</span></div></div></div>
+      <div class="ccard"><div class="ph mock" role="img" aria-label="Сайт клубу Євроспорт на екрані монітора"><div class="imac"><div class="scr"><img width="800" height="500" src="assets/es-desk.jpg" alt="Сайт фітнес-клубу Євроспорт, Львів — головна сторінка" loading="lazy"></div><div class="chin"></div><div class="neck"></div></div><span class="tag soon">В розробці</span><div class="cap"><b>Євроспорт</b><span>Львів · «Місце для повного життя»</span></div></div></div>
+      <div class="ccard"><div class="ph dark"><span class="lbl">Ваш клуб</span><div class="cap"><b>Твій сайт</b><span>2 місця на місяць</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. BIG IDEA — проблема -->
 <section id="truth">
   <h2 class="sh">Знайомо? <b>Так кажуть власники клубів</b></h2>
   <div class="scroller" id="sc">
@@ -1177,19 +1193,19 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   <p class="verdict">Жодна з цих проблем <b>не вирішується красивішим дизайном.</b></p>
 </section>
 
-<!-- 4. ЦИФРИ -->
+<!-- 3. BIG IDEA — інсайт у цифрах -->
 <section style="padding-top:30px">
   <div class="wrap">
     <h2 class="sh">Новий клієнт вирішує <b>швидше, ніж читає</b></h2>
     <div class="why">
       <div class="wcard"><div class="t"><h3>0,05 с на перше враження</h3><p>Стільки потрібно людині, щоб скласти перше враження про сайт.</p></div><div class="ph viz v1" role="img" aria-label="0,05 секунди — це двадцята частина однієї секунди"><div class="bar"><i></i></div><div class="cap"><span><b>0,05 с</b> · враження вже є</span><span>1 секунда</span></div></div></div>
       <div class="wcard"><div class="t"><h3>На типовому сайті заявку лишають 7 зі 100</h3><p>Решта 93 закривають вкладку. А за кожного з них ви вже заплатили рекламою.</p></div><div class="ph viz v2" role="img" aria-label="Зі 100 відвідувачів 7 лишають заявку, 93 йдуть"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="6" fill="#000"/></pattern></defs><rect y="0" width="200" height="20" fill="url(#dots)" style="--i:9"/><rect y="20" width="200" height="20" fill="url(#dots)" style="--i:8"/><rect y="40" width="200" height="20" fill="url(#dots)" style="--i:7"/><rect y="60" width="200" height="20" fill="url(#dots)" style="--i:6"/><rect y="80" width="200" height="20" fill="url(#dots)" style="--i:5"/><rect y="100" width="200" height="20" fill="url(#dots)" style="--i:4"/><rect y="120" width="200" height="20" fill="url(#dots)" style="--i:3"/><rect y="140" width="200" height="20" fill="url(#dots)" style="--i:2"/><rect y="160" width="200" height="20" fill="url(#dots)" style="--i:1"/><rect y="180" width="200" height="20" fill="url(#dots)" style="--i:0"/><g fill="#1a4dff"><circle cx="10" cy="10" r="6"/><circle cx="30" cy="10" r="6"/><circle cx="50" cy="10" r="6"/><circle cx="70" cy="10" r="6"/><circle cx="90" cy="10" r="6"/><circle cx="110" cy="10" r="6"/><circle cx="130" cy="10" r="6"/></g></svg><div class="leg"><div class="a"><b>7</b>лишають заявку</div><div><b>93</b>йдуть</div></div></div></div>
-      <div class="wcard"><div class="t"><h3>1 питання: «Що суто для мене?»</h3><p>Якщо сайт на нього не відповідає, він губить клієнта.</p></div><div class="ph viz v3" role="img" aria-label="Якщо сайт відповідає на питання, людина записується; якщо ні — клієнт втрачений"><div class="q">«Що суто для мене?»</div><i class="stem"></i><i class="fork"></i><div class="ans"><div class="yes"><b>Сайт відповів</b><span>запис на перше тренування</span></div><div class="no"><b>Не відповів</b><span>клієнт пішов</span></div></div></div></div>
+      <div class="wcard"><div class="t"><h3>1 питання: «Що тут суто для мене?»</h3><p>Якщо сайт на нього не відповідає, він губить клієнта.</p></div><div class="ph viz v3" role="img" aria-label="Якщо сайт відповідає на питання, людина записується; якщо ні — клієнт втрачений"><div class="q">«Що тут суто для мене?»</div><i class="stem"></i><i class="fork"></i><div class="ans"><div class="yes"><b>Сайт відповів</b><span>запис на перше тренування</span></div><div class="no"><b>Не відповів</b><span>клієнт пішов</span></div></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- 5. РІЗНИЦЯ — банер -->
+<!-- 3. BIG IDEA — чому в нас виходить -->
 <section style="padding-top:20px">
   <div class="wrap">
     <div class="banner">
@@ -1206,7 +1222,32 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   </div>
 </section>
 
-<!-- 6. МЕТОД — таби -->
+<!-- 3. BIG IDEA — методика: не лише сайт -->
+<section style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="sh">Не лише сайт, <b>а те, що за ним стоїть</b></h2>
+    <div class="g3">
+      <div class="gcard"><div class="ph gv" role="img" aria-label="Одна ідея клубу розходиться в рекламу, Instagram і на рецепцію"><div class="mviz gva"><div class="gtop">Одна ідея клубу</div><i class="gst"></i><i class="gfk"></i><div class="gch"><span>Реклама</span><span>Instagram</span><span>Рецепція</span></div></div></div><h4>Стратегія комунікації</h4><p>Одна ідея клубу, яка звучить однаково в рекламі, в Instagram і на рецепції.</p></div>
+      <div class="gcard"><div class="ph gv" role="img" aria-label="Чотири кроки: реклама, сайт, чому саме ви, заявка"><div class="mviz gvb"><div class="gpath"><em class="gln"><i></i></em><div><i></i><b>Реклама</b></div><div><i></i><b>Сайт</b></div><div><i></i><b>Чому ви</b></div><div class="k"><i></i><b>Заявка</b></div></div><p class="mcap">кожен екран веде до заявки</p></div></div><h4>Шлях нового клієнта</h4><p>Від реклами до заявки: що людина бачить на кожному екрані сайту, щоб записатися на перше тренування.</p></div>
+      <div class="gcard"><div class="ph gv" role="img" aria-label="Звіт: кліки з реклами, заявки в CRM, перші тренування"><div class="mviz gvc"><div class="grep"><b>Звіт</b><div><span>Кліки з реклами</span><i style="--w:100%"></i></div><div><span>Заявки в CRM</span><i style="--w:40%"></i></div><div class="k"><span>Перші тренування</span><i style="--w:22%"></i></div></div></div></div><h4>Сайт з аналітикою</h4><p>Заявка одразу потрапляє в CRM, а звіт показує, яка реклама привела клієнта.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. КОМУ НЕ ПІДХОДИТЬ / ЧОГО НЕ РОБИМО -->
+<section style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="sh">Ми підходимо <b>не кожному клубу</b></h2>
+    <div class="nfa4">
+      <div><h4>Тільки лендинги й корпоративні сайти</h4><p>Інтернет-магазини, сервіси й застосунки не робимо.</p></div>
+      <div><h4>Тільки з власниками клубів</h4><p>З агенціями й посередниками не працюємо.</p></div>
+      <div><h4>Ретельно обираємо клієнтів</h4><p>Якщо сайт вам не допоможе, не беремо в роботу.</p></div>
+      <div><h4>Фокусуємось на ефективності</h4><p>Робимо дорожче й довше, але краще.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ЯК МИ ПРАЦЮЄМО — етапи -->
 <section id="method" style="padding-top:20px">
   <div class="wrap">
     <h2 class="sh">Спершу розбираємося. <b>Потім малюємо.</b></h2>
@@ -1228,52 +1269,10 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   </div>
 </section>
 
-<!-- 7. ЩО ОТРИМУЄТЕ -->
+<!-- 5. ЯК МИ ПРАЦЮЄМО — терміни й що входить -->
 <section style="padding-top:20px">
   <div class="wrap">
-    <h2 class="sh">Не лише сайт, <b>а те, що за ним стоїть</b></h2>
-    <div class="g3">
-      <div class="gcard"><div class="ph gv" role="img" aria-label="Одна ідея клубу розходиться в рекламу, Instagram і на рецепцію"><div class="mviz gva"><div class="gtop">Одна ідея клубу</div><i class="gst"></i><i class="gfk"></i><div class="gch"><span>Реклама</span><span>Instagram</span><span>Рецепція</span></div></div></div><h4>Стратегія комунікації</h4><p>Одна ідея клубу, яка звучить однаково в рекламі, в Instagram і на рецепції.</p></div>
-      <div class="gcard"><div class="ph gv" role="img" aria-label="Чотири кроки: реклама, сайт, чому саме ви, заявка"><div class="mviz gvb"><div class="gpath"><em class="gln"><i></i></em><div><i></i><b>Реклама</b></div><div><i></i><b>Сайт</b></div><div><i></i><b>Чому ви</b></div><div class="k"><i></i><b>Заявка</b></div></div><p class="mcap">кожен екран веде до заявки</p></div></div><h4>Шлях нового клієнта</h4><p>Від реклами до заявки: що людина бачить на кожному екрані сайту, щоб записатися на перше тренування.</p></div>
-      <div class="gcard"><div class="ph gv" role="img" aria-label="Звіт: кліки з реклами, заявки в CRM, перші тренування"><div class="mviz gvc"><div class="grep"><b>Звіт</b><div><span>Кліки з реклами</span><i style="--w:100%"></i></div><div><span>Заявки в CRM</span><i style="--w:40%"></i></div><div class="k"><span>Перші тренування</span><i style="--w:22%"></i></div></div></div></div><h4>Сайт з аналітикою</h4><p>Заявка одразу потрапляє в CRM, а звіт показує, яка реклама привела клієнта.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 8. КЕЙСИ -->
-<section id="cases" style="padding-top:20px">
-  <div class="wrap">
-    <h2 class="sh">Клуби, <b>з якими ми працюємо</b></h2>
-    <div class="g3">
-      <div class="ccard"><div class="ph mock" role="img" aria-label="Сайт клубу Happy Sport Club на екрані монітора"><div class="imac"><div class="scr"><img width="800" height="500" src="assets/hsc-site-desk.jpg" alt="Сайт фітнес-клубу Happy Sport Club, Рівне — головна сторінка" loading="lazy"></div><div class="chin"></div><div class="neck"></div></div><span class="tag soon">В розробці</span><div class="cap"><b>Happy Sport Club</b><span>Рівне · «Зал, який ти шукав, у середині твого кварталу»</span></div></div></div>
-      <div class="ccard"><div class="ph mock" role="img" aria-label="Сайт клубу Євроспорт на екрані монітора"><div class="imac"><div class="scr"><img width="800" height="500" src="assets/es-desk.jpg" alt="Сайт фітнес-клубу Євроспорт, Львів — головна сторінка" loading="lazy"></div><div class="chin"></div><div class="neck"></div></div><span class="tag soon">В розробці</span><div class="cap"><b>Євроспорт</b><span>Львів · «Місце для повного життя»</span></div></div></div>
-      <div class="ccard"><div class="ph dark"><span class="lbl">Ваш клуб</span><div class="cap"><b>Твій сайт</b><span>2 місця на місяць</span></div></div></div>
-    </div>
-
-    <div class="meet" style="margin-top:50px">
-      <div class="mcard"><div class="ph max" role="img" aria-label="Макс, засновник Consulting Fitness"></div>
-        <details><summary>Робимо самі, без посередників</summary><p>Макс — засновник Consulting Fitness. Ми відкриваємо клуби під ключ і робимо їм сайти, тож фітнес-бізнес знаємо зсередини, а не з брифу. Без менеджерів-перекладачів: ви говорите напряму з тими, хто робить.</p></details></div>
-      <div class="mcard"><div class="ph sys" role="img" aria-label="Обладнання, світло, звук, дизайн, CRM і застосунок сходяться в сайт, який продає"><div class="sysv"><div class="sch"><span>Обладнання</span><span>Світло</span><span>Звук</span><span>Дизайн</span><span>CRM</span><span>Застосунок</span></div><i class="sfk"></i><i class="sst"></i><div class="stop">Сайт, який продає</div><p class="scap">відкриваємо клуб під ключ, сайт — його частина</p></div></div>
-        <details><summary>Ми відкриваємо клуби</summary><p>Ми запускаємо клуб цілком: обладнання, світло, звук, дизайн, CRM і застосунок. Сайт — частина цієї системи, тому ми робимо його не для краси, а щоб він приводив людей і продавав абонементи.</p></details></div>
-    </div>
-  </div>
-</section>
-
-<!-- 9. ФОРМАТИ -->
-<section id="formats" style="padding-top:20px">
-  <div class="wrap">
-    <h2 class="sh">Формати <b>під задачу клубу</b></h2>
-    <div class="g3">
-      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Одна сторінка на телефоні з однією кнопкою запису"><div class="flp"><span class="flab">Перше тренування</span><b>Прийди на пробне. Безкоштовно</b><p>Тренер проведе всю годину і покаже зал.</p><span class="fbt">Записатись</span></div></div><h4>Лендинг на пробне</h4><div class="pills"><span class="pill">Реклама є, заявок мало</span><span class="pill">від 30 днів</span></div></div>
-      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Сайт клубу з кількома розділами, заявка з якого йде в CRM"><div class="flw"><div class="fnav"><b>Клуб</b><span>Розклад</span><span>Тренери</span><span>Ціни</span></div><div class="fbody"><b>Місце для повного життя</b><div class="fsch"><span>Пн 08:00<br>Силове</span><span class="on">Пн 19:00<br>Йога</span><span>Вт 07:30<br>Функц.</span></div><span class="fbt">Записатись → CRM</span></div></div></div><h4>Сайт клубу</h4><div class="pills"><span class="pill">Продає щодня</span><span class="pill">Інтеграція з CRM</span><span class="pill">від 30 днів</span></div></div>
-      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Список очікування заповнюється до відкриття клубу"><div class="fls"><span class="flab">До відкриття</span><div class="ft">42</div><p>дні · 128 людей уже в списку</p><div class="ff"><i></i><span class="fbt">У список</span></div></div></div><h4>Предпродаж</h4><div class="pills"><span class="pill">Клуб ще будується</span><span class="pill">База до відкриття</span></div></div>
-    </div>
-    
-
-    <div class="fmtcta"><a href="#form" class="btn">Обговорити проєкт →</a></div>
-    
-
-    <div class="system" style="margin-top:80px">
+    <div class="system">
       <div class="ph mock" role="img" aria-label="Сайт клубу Євроспорт на екрані монітора"><div class="imac"><div class="scr"><img width="800" height="500" src="assets/es-desk.jpg" alt="Сайт фітнес-клубу Євроспорт, Львів — головна сторінка" loading="lazy"></div><div class="chin"></div><div class="neck"></div></div></div>
       <div class="hw">
         <div class="save"><span class="tag">Найчастіше обирають</span></div>
@@ -1289,20 +1288,36 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   </div>
 </section>
 
-<!-- 10. НЕ ДЛЯ ВСІХ -->
+<!-- 5. ЯК МИ ПРАЦЮЄМО — формати -->
+<section id="formats" style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="sh">Формати <b>під задачу клубу</b></h2>
+    <div class="g3">
+      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Одна сторінка на телефоні з однією кнопкою запису"><div class="flp"><span class="flab">Перше тренування</span><b>Прийди на пробне. Безкоштовно</b><p>Тренер проведе всю годину і покаже зал.</p><span class="fbt">Записатись</span></div></div><h4>Лендинг на пробне</h4><div class="pills"><span class="pill">Реклама є, заявок мало</span><span class="pill">від 30 днів</span></div></div>
+      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Сайт клубу з кількома розділами, заявка з якого йде в CRM"><div class="flw"><div class="fnav"><b>Клуб</b><span>Розклад</span><span>Тренери</span><span>Ціни</span></div><div class="fbody"><b>Місце для повного життя</b><div class="fsch"><span>Пн 08:00<br>Силове</span><span class="on">Пн 19:00<br>Йога</span><span>Вт 07:30<br>Функц.</span></div><span class="fbt">Записатись → CRM</span></div></div></div><h4>Сайт клубу</h4><div class="pills"><span class="pill">Продає щодня</span><span class="pill">Інтеграція з CRM</span><span class="pill">від 30 днів</span></div></div>
+      <div class="fmtcard"><div class="ph fv" role="img" aria-label="Список очікування заповнюється до відкриття клубу"><div class="fls"><span class="flab">До відкриття</span><div class="ft">42</div><p>дні · 128 людей уже в списку</p><div class="ff"><i></i><span class="fbt">У список</span></div></div></div><h4>Предпродаж</h4><div class="pills"><span class="pill">Клуб ще будується</span><span class="pill">База до відкриття</span></div></div>
+    </div>
+    
+
+    <div class="fmtcta"><a href="#form" class="btn">Обговорити проєкт →</a></div>
+    
+
+  </div>
+</section>
+
+<!-- 6. КОМАНДА -->
 <section style="padding-top:20px">
   <div class="wrap">
-    <h2 class="sh">Ми підходимо <b>не кожному клубу</b></h2>
-    <div class="nfa4">
-      <div><h4>Тільки лендинги й корпоративні сайти</h4><p>Інтернет-магазини, сервіси й застосунки не робимо.</p></div>
-      <div><h4>Тільки з власниками клубів</h4><p>З агенціями й посередниками не працюємо.</p></div>
-      <div><h4>Ретельно обираємо клієнтів</h4><p>Якщо сайт вам не допоможе, не беремо в роботу.</p></div>
-      <div><h4>Фокусуємось на ефективності</h4><p>Робимо дорожче й довше, але краще.</p></div>
+    <div class="meet">
+      <div class="mcard"><div class="ph max" role="img" aria-label="Макс, засновник Consulting Fitness"></div>
+        <details><summary>Робимо самі, без посередників</summary><p>Макс — засновник Consulting Fitness. Ми відкриваємо клуби під ключ і робимо їм сайти, тож фітнес-бізнес знаємо зсередини, а не з брифу. Без менеджерів-перекладачів: ви говорите напряму з тими, хто робить.</p></details></div>
+      <div class="mcard"><div class="ph sys" role="img" aria-label="Обладнання, світло, звук, дизайн, CRM і застосунок сходяться в сайт, який продає"><div class="sysv"><div class="sch"><span>Обладнання</span><span>Світло</span><span>Звук</span><span>Дизайн</span><span>CRM</span><span>Застосунок</span></div><i class="sfk"></i><i class="sst"></i><div class="stop">Сайт, який продає</div><p class="scap">відкриваємо клуб під ключ, сайт — його частина</p></div></div>
+        <details><summary>Ми відкриваємо клуби</summary><p>Ми запускаємо клуб цілком: обладнання, світло, звук, дизайн, CRM і застосунок. Сайт — частина цієї системи, тому ми робимо його не для краси, а щоб він приводив людей і продавав абонементи.</p></details></div>
     </div>
   </div>
 </section>
 
-<!-- 11. ОФЕР -->
+<!-- 7. ОБГОВОРИТИ ПРОЄКТ -->
 <section style="padding-top:20px">
   <div class="wrap">
     <div class="offer-strip">
@@ -1330,7 +1345,7 @@ nav .bar .right .btn .lg,nav .btn{font-size:14px}
   </div>
 </section>
 
-<!-- 12. FAQ -->
+<!-- 8. FAQ -->
 <section id="faq" style="padding-top:20px">
   <div class="wrap">
     <h2 class="sh">Перш ніж <b>написати</b></h2>
