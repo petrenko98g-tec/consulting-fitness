@@ -20,11 +20,27 @@ export async function onRequestPost({ request, env }) {
   try { data = JSON.parse(raw); } catch { return new Response('bad json', { status: 400 }); }
   if (!data || typeof data !== 'object' || Array.isArray(data)) return new Response('bad data', { status: 400 });
 
+  // захист від спаму: не більше 5 заявок за хвилину з однієї IP (лічильник у кеші Cloudflare, безкоштовно)
+  const ip = request.headers.get('CF-Connecting-IP') || 'x';
+  const key = new Request(`https://rate.local/${encodeURIComponent(ip)}`);
+  const cache = caches.default;
+  const hit = await cache.match(key);
+  const count = hit ? Number(await hit.text()) || 0 : 0;
+  if (count >= 5) return json({ saved: false, telegram: false, limited: true }, 429);
+  await cache.put(key, new Response(String(count + 1), { headers: { 'Cache-Control': 'max-age=60' } }));
+
+  // пастка для ботів: справжня форма ніколи не заповнює це поле
+  if (data._hp) return json({ saved: true, telegram: false });
+
   const clean = {};
   for (const [k, v] of Object.entries(data).slice(0, 30)) {
     if (k.startsWith('_') || v == null || v === '') continue;
     clean[String(k).slice(0, 60)] = String(v).slice(0, 300);
   }
+
+  // заявка без контакту — не заявка
+  const contact = Object.entries(clean).some(([k, v]) => /телефон|telegram|ім/i.test(k) && v.trim().length >= 2);
+  if (!contact) return new Response('bad data', { status: 400 });
 
   let saved = false;
   if (env.LEADS) {
