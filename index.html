@@ -1488,8 +1488,11 @@ function cfSource(){try{return JSON.parse(sessionStorage.getItem('cf_src')||'{}'
 const FORM_TO='https://formsubmit.co/ajax/petrenko9.8g@gmail.com';
 /* копія заявки в Telegram — через серверну функцію /api/lead на Cloudflare (токен бота лежить там у секретах, не в коді сторінки) */
 const LEAD_RELAY=/(^|\.)websites\.fitness$|\.pages\.dev$/.test(location.hostname)?'/api/lead':'';
-function cfTelegram(d){if(!LEAD_RELAY)return;
-  try{fetch(LEAD_RELAY,{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify(d)}).catch(()=>{});}catch(e){}}
+/* запит з обмеженням часу: сервіс, що завис, не тримає кнопку в «Надсилаємо…» */
+function cfFetch(url,opt,ms){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);return fetch(url,Object.assign({},opt,{signal:c.signal})).finally(()=>clearTimeout(t));}
+/* резерв: заявка зберігається в Cloudflare (і йде в Telegram, якщо підключено). true — якщо збережено */
+function cfRelay(d){if(!LEAD_RELAY)return Promise.resolve(false);
+  return cfFetch(LEAD_RELAY,{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify(d)},10000).then(r=>r.ok?r.json():{}).then(j=>!!(j&&(j.saved||j.telegram))).catch(()=>false);}
 function formSource(f){if(f.closest('#drw'))return'Бічна форма';if(f.closest('#promo'))return'Знижка −15%';if(f.closest('.foot'))return'Футер';if(f.closest('.offer-strip'))return'Блок «Розбір сайту»';if(f.closest('#form'))return'Перший екран';return'Сайт';}
 function sent(f){
   const hp=f.querySelector('.hp');if(hp&&hp.value){f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';return false;}
@@ -1498,11 +1501,13 @@ function sent(f){
   const g=f.querySelector('#promoGoal');if(g&&g.value)d['Задача']=g.value;const src=cfSource();const names={utm_source:'Джерело (utm_source)',utm_medium:'Канал (utm_medium)',utm_campaign:'Кампанія (utm_campaign)',utm_content:'Оголошення (utm_content)',utm_term:'Ключ (utm_term)',gclid:'Google Ads (gclid)',fbclid:'Meta (fbclid)',referrer:'Прийшов із'};d['Звідки прийшов']=Object.keys(src).length?'':'напряму / невідомо';Object.keys(src).forEach(k=>d[names[k]||k]=src[k]);if(!d['Звідки прийшов'])delete d['Звідки прийшов'];
   const leadId=cfLeadId();d['ID заявки']=leadId;const btn=f.querySelector('[type=submit]'),txt=btn.textContent;btn.disabled=true;btn.textContent='Надсилаємо…';
   let err=f.querySelector('.ferr');if(err)err.remove();
-  cfTelegram(d);
-  fetch(FORM_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
-   .then(r=>r.ok?r.json():Promise.reject(r.status))
-   .then(j=>{if(j&&String(j.success)==='false')throw 0;f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';cfTrackLead(d['Форма'],leadId);})
-   .catch(()=>{btn.disabled=false;btn.textContent=txt;const e=document.createElement('p');e.className='ferr';e.innerHTML='Не вдалося надіслати. Напишіть нам або зателефонуйте: <a href="tel:+380664660726">+380 66 466 07 26</a>';f.appendChild(e);});
+  const ok=()=>{f.style.display='none';f.parentNode.querySelector('.ok').style.display='block';cfTrackLead(d['Форма'],leadId);};
+  const fail=()=>{btn.disabled=false;btn.textContent=txt;const e=document.createElement('p');e.className='ferr';e.innerHTML='Не вдалося надіслати. Напишіть нам або зателефонуйте: <a href="tel:+380664660726">+380 66 466 07 26</a>';f.appendChild(e);};
+  const relay=cfRelay(d);
+  const mail=cfFetch(FORM_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)},12000)
+   .then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>!(j&&String(j.success)==='false')).catch(()=>false);
+  let done=false;const win=v=>{if(v&&!done){done=true;ok();}};mail.then(win);relay.then(win);
+  Promise.all([mail,relay]).then(()=>{if(!done)fail();});
   return false;}
 </script>
 <script>
